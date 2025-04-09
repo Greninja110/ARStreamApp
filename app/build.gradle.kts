@@ -1,11 +1,12 @@
-// File: ARStreamApp/app/build.gradle.kts
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")  // Use the full plugin ID
-    id("org.jetbrains.kotlin.kapt")     // Use the full plugin ID for kapt
+    id("kotlin-android")
+    id("kotlin-kapt")
 }
-val kotlinVersion = "1.7.20"
+
 android {
+    namespace = "com.example.arstream"
     compileSdk = 33
 
     defaultConfig {
@@ -19,12 +20,10 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField("boolean", "DEBUG_MODE", "true")
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         release {
-            buildConfigField("boolean", "DEBUG_MODE", "false")
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
@@ -41,15 +40,14 @@ android {
 
     buildFeatures {
         viewBinding = true
+        dataBinding = true
         buildConfig = true
-        dataBinding = true // Add this if you're using data binding
     }
-    namespace = "com.example.arstream" // Add this line if not present
 }
 
 dependencies {
     // Kotlin
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.7.20")
     implementation("androidx.core:core-ktx:1.9.0")
 
     // AndroidX
@@ -71,7 +69,6 @@ dependencies {
     implementation("androidx.camera:camera-view:$cameraxVersion")
 
     // RTSP Streaming
-    //implementation("com.github.pedroSG94:rtmp-rtsp-stream-client-java:2.1.9")
     implementation("com.github.pedroSG94:rtplibrary:2.2.0")
 
     // WebSocket
@@ -86,6 +83,7 @@ dependencies {
 
     // JSON
     implementation("com.squareup.moshi:moshi:1.14.0")
+    implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
 
     // Testing

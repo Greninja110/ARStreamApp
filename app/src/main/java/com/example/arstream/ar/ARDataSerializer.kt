@@ -12,6 +12,7 @@ import java.util.zip.Deflater
 import java.util.zip.DeflaterOutputStream
 import java.util.zip.GZIPOutputStream
 import java.io.ByteArrayOutputStream
+import java.nio.ByteOrder
 
 /**
  * Serializes ARCore data for transmission

@@ -1,8 +1,8 @@
+// app/build.gradle.kts
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")  // Use the full plugin ID
-    id("kotlin-android")
-    id("kotlin-kapt")
+    id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.kapt")
 }
 
 android {
@@ -19,14 +19,16 @@ android {
     }
 
     buildTypes {
-        debug {
+        release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
-        release {
-            isMinifyEnabled = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-        }
+    }
+
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+        buildConfig = true
     }
 
     compileOptions {
@@ -37,26 +39,13 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-
-    buildFeatures {
-        viewBinding = true
-        dataBinding = true
-        buildConfig = true
-    }
 }
 
 dependencies {
-    // Kotlin
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.7.20")
     implementation("androidx.core:core-ktx:1.9.0")
-
-    // AndroidX
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.8.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
 
     // ARCore
     implementation("com.google.ar:core:1.36.0")
@@ -68,7 +57,7 @@ dependencies {
     implementation("androidx.camera:camera-lifecycle:$cameraxVersion")
     implementation("androidx.camera:camera-view:$cameraxVersion")
 
-    // RTSP Streaming
+    // RTSP Streaming - Using the correct artifact
     implementation("com.github.pedroSG94:rtplibrary:2.2.0")
 
     // WebSocket

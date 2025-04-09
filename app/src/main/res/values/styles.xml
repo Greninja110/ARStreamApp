@@ -1,6 +1,5 @@
-<!-- File: ARStreamApp/app/src/main/res/values/styles.xml -->
+<!-- app/src/main/res/values/styles.xml -->
 <resources>
-    <!-- Base application theme -->
     <style name="Theme.ARStream" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>

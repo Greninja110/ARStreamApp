@@ -3,6 +3,7 @@ package com.example.arstream.ui
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.example.arstream.R
@@ -113,15 +114,13 @@ class SettingsActivity : AppCompatActivity() {
         Logger.d(TAG, "Settings saved")
 
         // Show confirmation
-        binding.root.post {
-            binding.saveFeedback.text = getString(R.string.settings_saved)
-            binding.saveFeedback.visibility = android.view.View.VISIBLE
+        binding.saveFeedback.text = getString(R.string.settings_saved)
+        binding.saveFeedback.visibility = View.VISIBLE
 
-            // Hide confirmation after 3 seconds
-            binding.root.postDelayed({
-                binding.saveFeedback.visibility = android.view.View.GONE
-            }, 3000)
-        }
+        // Hide confirmation after 3 seconds
+        binding.root.postDelayed({
+            binding.saveFeedback.visibility = View.GONE
+        }, 3000)
     }
 
     private fun resetSettings() {
@@ -134,15 +133,13 @@ class SettingsActivity : AppCompatActivity() {
         Logger.d(TAG, "Settings reset to defaults")
 
         // Show confirmation
-        binding.root.post {
-            binding.saveFeedback.text = getString(R.string.settings_reset)
-            binding.saveFeedback.visibility = android.view.View.VISIBLE
+        binding.saveFeedback.text = getString(R.string.settings_reset)
+        binding.saveFeedback.visibility = View.VISIBLE
 
-            // Hide confirmation after 3 seconds
-            binding.root.postDelayed({
-                binding.saveFeedback.visibility = android.view.View.GONE
-            }, 3000)
-        }
+        // Hide confirmation after 3 seconds
+        binding.root.postDelayed({
+            binding.saveFeedback.visibility = View.GONE
+        }, 3000)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

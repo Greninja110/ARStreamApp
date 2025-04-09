@@ -2,13 +2,12 @@
 package com.example.arstream.network
 
 import android.content.Context
-import android.media.MediaCodec
 import android.media.MediaFormat
+import android.view.SurfaceView
 import com.example.arstream.utils.Logger
 import com.example.arstream.utils.PreferenceManager
 import com.pedro.rtsp.utils.ConnectCheckerRtsp
 import com.pedro.rtplibrary.rtsp.RtspCamera2
-import java.nio.ByteBuffer
 
 /**
  * RTSP server for streaming video and data
@@ -22,8 +21,6 @@ class RTSPServer(
 
         // RTSP stream paths
         const val VIDEO_PATH = "/camera"
-        const val DEPTH_PATH = "/depth"
-        const val AR_DATA_PATH = "/ardata"
     }
 
     private val preferenceManager = PreferenceManager(context)
@@ -35,7 +32,7 @@ class RTSPServer(
     /**
      * Initialize the RTSP server with camera preview surface
      */
-    fun initialize(surfaceView: android.view.SurfaceView) {
+    fun initialize(surfaceView: SurfaceView) {
         try {
             rtspCamera = RtspCamera2(surfaceView, connectChecker)
             Logger.d(TAG, "RTSP server initialized with preview surface")
@@ -83,9 +80,7 @@ class RTSPServer(
             val rtspUrl = "rtsp://${preferenceManager.serverAddress}:${preferenceManager.serverPort}${VIDEO_PATH}"
 
             // Start streaming
-            val result = rtspCamera?.startStream(rtspUrl)
-
-            if (result == true) {
+            if (rtspCamera?.startStream(rtspUrl) == true) {
                 isConnected = true
                 Logger.i(TAG, "RTSP stream started: $rtspUrl")
             } else {
@@ -114,16 +109,6 @@ class RTSPServer(
      */
     fun isStreaming(): Boolean {
         return rtspCamera?.isStreaming ?: false
-    }
-
-    /**
-     * Send custom data over RTSP (for depth maps and AR data)
-     */
-    fun sendCustomData(data: ByteArray, streamPath: String) {
-        // This is a simplified version - in a real implementation,
-        // you would need to properly multiplex this data into the RTSP stream
-        // or use a separate connection for this data
-        Logger.d(TAG, "Sending ${data.size} bytes of custom data to $streamPath")
     }
 
     /**

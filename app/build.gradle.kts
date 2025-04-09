@@ -41,7 +41,10 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
+        dataBinding = true // Add this if you're using data binding
     }
+    namespace = "com.example.arstream" // Add this line if not present
 }
 
 dependencies {
@@ -68,7 +71,8 @@ dependencies {
     implementation("androidx.camera:camera-view:$cameraxVersion")
 
     // RTSP Streaming
-    implementation("com.github.pedroSG94:rtmp-rtsp-stream-client-java:2.1.9")
+    //implementation("com.github.pedroSG94:rtmp-rtsp-stream-client-java:2.1.9")
+    implementation("com.github.pedroSG94:rtplibrary:2.2.0")
 
     // WebSocket
     implementation("org.java-websocket:Java-WebSocket:1.5.3")

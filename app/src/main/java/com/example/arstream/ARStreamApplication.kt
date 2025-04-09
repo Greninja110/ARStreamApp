@@ -13,7 +13,8 @@ class ARStreamApplication : Application() {
         super.onCreate()
 
         // Initialize Timber for logging
-        if (BuildConfig.DEBUG_MODE) {
+        // Use standard BuildConfig.DEBUG instead of DEBUG_MODE
+        if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
             Timber.plant(FileLoggingTree(this))
         }
